@@ -14,7 +14,7 @@ dependencies:
   - tensorflow==1.2.0
   - Pillow>=2.3.0,<=3.1.2
   - numpy>=1.8.1,<=1.14.0
-  - scipy>=0.13.3,<=0.17.0
+  - scipy
   - protobuf>=2.5.0,<=3.2.0
   - gevent>=1.0,<=1.1.0
   - gevent-websocket==0.9.3
