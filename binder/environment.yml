@@ -21,7 +21,7 @@ dependencies:
   - lmdb
   - python-lmdb
   - h5py>=2.2.1,<=2.6.0
-  - pydot>=1.0.28,<=1.0.29
+  - pydot
   - matplotlib
   - scikit-fmm>=0.0.9
   - graphviz

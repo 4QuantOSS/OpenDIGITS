@@ -17,7 +17,6 @@ env:
     matrix:
         - DIGITS_TEST_FRAMEWORK=torch
         - DIGITS_TEST_FRAMEWORK=tensorflow
-        - DIGITS_TEST_FRAMEWORK=none
         - DIGITS_TEST_FRAMEWORK=none WITH_PLUGINS=false
 
 matrix:

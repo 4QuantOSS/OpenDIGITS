@@ -77,7 +77,7 @@ class BaseViewsTest(object):
         url = '/%s/%s/status' % (job_type, job_id)
         rv = cls.app.get(url)
         assert rv.status_code == 200, 'Cannot get status of job %s. "%s" returned %s' % (job_id, url, rv.status_code)
-        status = json.loads(rv.data)
+        status = json.loads(rv.data.decode())
         return status['status']
 
     @classmethod
@@ -88,7 +88,7 @@ class BaseViewsTest(object):
         url = '/%s/%s.json' % (job_type, job_id)
         rv = cls.app.get(url)
         assert rv.status_code == 200, 'Cannot get info from job %s. "%s" returned %s' % (job_id, url, rv.status_code)
-        info = json.loads(rv.data)
+        info = json.loads(rv.data.decode())
         return info
 
     @classmethod
@@ -183,7 +183,7 @@ class TestViews(BaseViewsTest):
         rv = self.app.get('/')
         assert rv.status_code == 200, 'page load failed with %s' % rv.status_code
         for text in ['Home', 'Datasets', 'Models']:
-            assert text in rv.data, 'unexpected page format'
+            assert text in rv.data.decode(), 'unexpected page format'
 
     def test_invalid_page(self):
         rv = self.app.get('/foo')
@@ -195,8 +195,8 @@ class TestViews(BaseViewsTest):
 
     def check_autocomplete(self, absolute_path):
         path = '/' if absolute_path else './'
-        url = '/autocomplete/path?query=%s' % (urllib.quote(path, safe=''))
+        url = '/autocomplete/path?query=%s' % (urllib.parse.quote(path, safe=''))
         rv = self.app.get(url)
         assert rv.status_code == 200
-        status = json.loads(rv.data)
+        status = json.loads(rv.data.decode())
         assert 'suggestions' in status
