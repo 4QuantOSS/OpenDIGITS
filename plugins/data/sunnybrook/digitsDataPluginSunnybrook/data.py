@@ -8,13 +8,18 @@ import os
 import random
 import re
 
-import pydicom
+import dicom
 import numpy as np
 
 from digits.utils import subclass, override, constants
 from digits.utils.constants import COLOR_PALETTE_ATTRIBUTE
 from digits.extensions.data.interface import DataIngestionInterface
 from .forms import DatasetForm, InferenceForm
+
+try:
+    basestring        # Python 2
+except NameError:
+    basestring = str  # Python 3
 
 
 DATASET_TEMPLATE = "templates/dataset_template.html"
@@ -95,7 +100,7 @@ def load_contour(contour, img_path):
 
 
 def load_image(full_path):
-    f = pydicom.dcmread(full_path)
+    f = dicom.read_file(full_path)
     return f.pixel_array.astype(np.int)
 
 
