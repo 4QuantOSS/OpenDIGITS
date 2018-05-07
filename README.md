@@ -1,15 +1,19 @@
-# DIGITS
+# OpenDIGITS [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/kmader/DIGITS/master?urlpath=digits)
 
-[![Build Status](https://travis-ci.org/NVIDIA/DIGITS.svg?branch=master)](https://travis-ci.org/NVIDIA/DIGITS)
 
-DIGITS (the **D**eep Learning **G**PU **T**raining **S**ystem) is a webapp for training deep learning models.
-The currently supported frameworks are: Caffe, Torch, and Tensorflow.
+[![Build Status](https://travis-ci.org/kmader/DIGITS.svg?branch=master)](https://travis-ci.org/kmader/DIGITS)
+
+OpenDIGITS (the **D**eep Learning **G**PU **T**raining **S**ystem) is a webapp for training deep learning models.
+The currently supported frameworks are: Torch and Tensorflow on Python 3.
+
+The primary difference between this and the NVIDIA version is this is designed to be easier to install with python 3 support (pip install soon!) and no old Caffe left-overs
 
 # Installation
 
 | Installation method | Supported platform[s] | Available versions | Instructions |
 | --- | --- | --- | --- |
 | Source | Ubuntu 14.04, 16.04 | [GitHub tags](https://github.com/NVIDIA/DIGITS/releases) | [docs/BuildDigits.md](docs/BuildDigits.md) |
+| PIP Wheel | OS X, Windows 64 | Coming Soon! | In Preparation |
 
 
 # Usage
