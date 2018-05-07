@@ -16,8 +16,8 @@ dependencies:
   - numpy>=1.8.1,<=1.14.0
   - scipy
   - protobuf>=2.5.0,<=3.2.0
-  - gevent>=1.0,<=1.1.0
-  - gevent-websocket==0.9.3
+  - gevent
+  - gevent-websocket
   - lmdb
   - python-lmdb
   - h5py>=2.2.1,<=2.6.0
