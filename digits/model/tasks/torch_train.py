@@ -21,7 +21,7 @@ from digits.config import config_value
 from digits.utils import subclass, override, constants
 
 # Must import after importing digit.config
-import caffe_pb2
+
 from functools import reduce
 
 try:

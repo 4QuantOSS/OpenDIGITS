@@ -13,6 +13,7 @@ from digits import utils  # noqa
 from digits.utils import filesystem as fs  # noqa
 from digits.utils.store import StoreCache  # noqa
 import digits.scheduler  # noqa
+import codecs
 
 # Create Flask, Scheduler and SocketIO objects
 
@@ -22,7 +23,7 @@ app.config['DEBUG'] = True
 # Disable CSRF checking in WTForms
 app.config['WTF_CSRF_ENABLED'] = False
 # This is still necessary for SocketIO
-app.config['SECRET_KEY'] = os.urandom(12).encode('hex')
+app.config['SECRET_KEY'] = codecs.encode(os.urandom(12), 'hex')
 app.url_map.redirect_defaults = False
 app.config['URL_PREFIX'] = url_prefix
 socketio = SocketIO(app, async_mode='gevent', path=url_prefix+'/socket.io')
