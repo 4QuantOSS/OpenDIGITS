@@ -8,7 +8,10 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import PIL.Image
-import skfmm
+try:
+    import skfmm
+except:
+    print('scikit-fmm would be really nice')
 
 import digits
 from digits.utils import subclass, override

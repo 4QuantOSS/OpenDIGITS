@@ -14,9 +14,11 @@ DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 class JobIdLogger(logging.Logger):
 
-    def makeRecord(self, name, level, fn, lno, msg, args, exc_info, func=None, extra=None):
+    def makeRecord(self, name, level, fn, lno, msg, args, exc_info, func=None, extra=None, sinfo = None):
         """
         Customizing it to set a default value for extra['job_id']
+        def makeRecord(self, name, level, fn, lno, msg, args, exc_info,
+                   func=None, extra=None, sinfo=None):
         """
         rv = logging.LogRecord(name, level, fn, lno, msg, args, exc_info, func)
         if extra is not None:
