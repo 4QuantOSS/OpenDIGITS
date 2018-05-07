@@ -43,7 +43,7 @@ matrix:
                       - gnupg
           install:
               - git fetch --unshallow
-              - git remote add nvidia-digits-upstream https://github.com/NVIDIA/DIGITS.git  # for forks
+              - git remote add nvidia-digits-upstream https://github.com/kmader/DIGITS.git  # for forks
               - git fetch nvidia-digits-upstream --tags
               - pip install twine
           script:
@@ -55,7 +55,7 @@ matrix:
                 skip_cleanup: true
                 script: ./scripts/travis/ppa-upload.sh stable
                 on:
-                    repo: NVIDIA/DIGITS
+                    repo: kmader/DIGITS
                     tags: true
               - provider: script
                 skip_cleanup: true
@@ -121,7 +121,6 @@ install:
     - mkdir -p ~/.config/matplotlib
     - echo "backend:agg" > ~/.config/matplotlib/matplotlibrc
     - ./scripts/travis/install-protobuf.sh $PROTOBUF_ROOT
-    - ./scripts/travis/install-caffe.sh $CAFFE_ROOT
     - if [ "$DIGITS_TEST_FRAMEWORK" == "torch" ]; then travis_wait ./scripts/travis/install-torch.sh $TORCH_ROOT; else unset TORCH_ROOT; fi
     - pip install -r ./requirements.txt --force-reinstall
     - if [ "$DIGITS_TEST_FRAMEWORK" == "tensorflow" ]; then travis_wait ./scripts/travis/install-tensorflow.sh; fi

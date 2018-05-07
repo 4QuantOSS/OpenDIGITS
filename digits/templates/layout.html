@@ -37,7 +37,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="{{ url_for("digits.views.home") }}">DIGITS</a>
+            <a class="navbar-brand" href="{{ url_for("digits.views.home") }}">OpenDIGITS</a>
         </div>
         <ul class="nav navbar-nav">
             {% block nav %}
@@ -60,13 +60,15 @@
                 <li><span class="navbar-text">Server: {{server_name}}</span></li>
                 {% endif %}
                 <li><span class="navbar-text">DIGITS version: <br> {{server_version}}</span></li>
-                <li><span class="navbar-text">Caffe version: <br> {{caffe_version}}</span></li>
-                <li><span class="navbar-text">Caffe flavor: <br> {{caffe_flavor}}</span></li>
+                <li><span class="navbar-text">TF version: <br> 1.2</span></li>
             </ul>
             </li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<span class="caret"></span></a>
                 <ul class="dropdown-menu about-menu navbar-inverse">
+                    <li><span class="navbar-text"><a target="_blank" href="https://github.com/kmader/DIGITS">
+                        OpenDIGITS on GitHub
+                    </a></span></li>
                     <li><span class="navbar-text"><a target="_blank" href="https://developer.nvidia.com/digits">
                         DIGITS on developer.nvidia.com
                     </a></span></li>

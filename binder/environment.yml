@@ -22,7 +22,7 @@ dependencies:
   - python-lmdb
   - h5py>=2.2.1,<=2.6.0
   - pydot>=1.0.28,<=1.0.29
-  - matplotlib>=1.3.1,<=1.5.2
+  - matplotlib
   - scikit-fmm>=0.0.9
   - graphviz
   - opencv3>=3.0
