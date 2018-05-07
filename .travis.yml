@@ -91,25 +91,25 @@ addons:
             - libopenblas-dev
             - libopencv-dev
             - libsnappy-dev
-            - python-dev
-            - python-flask
-            - python-gevent
-            - python-gevent-websocket
-            - python-gflags
-            - python-h5py
-            - python-matplotlib
-            - python-mock
-            - python-nose
-            - python-numpy
-            - python-opencv
-            - python-pil
-            - python-pip
-            - python-psutil
-            - python-pydot
-            - python-requests
-            - python-scipy
-            - python-six
-            - python-skimage
+            - python3-dev
+            - python3-flask
+            - python3-gevent
+            - python3-gevent-websocket
+            - python3-gflags
+            - python3-h5py
+            - python3-matplotlib
+            - python3-mock
+            - python3-nose
+            - python3-numpy
+            - python3-opencv
+            - python3-pil
+            - python3-pip
+            - python3-psutil
+            - python3-pydot
+            - python3-requests
+            - python3-scipy
+            - python3-six
+            - python3-skimage
 
 before_install:
     - deactivate

@@ -13,7 +13,7 @@ class DLStudioProxyHandler(SuperviseAndProxyHandler):
 
     def get_cmd(self):
         cmd = ['python',
-               'launch.py',
+               'binder/launch.py',
                '-p', 
                str(self.port)
                ]

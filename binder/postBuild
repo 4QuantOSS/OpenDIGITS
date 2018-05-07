@@ -4,7 +4,9 @@ jupyter serverextension enable --py nbserverproxy
 python setup.py install
 # download some datas
 python -m digits.download_data cifar10 ~/cifar10
-cd binder; pip3 install -e.; cd ..;
+cd binder
+pip3 install -e.
 jupyter serverextension enable --py nbdlstudioproxy
-jupyter nbextension     install --py nbdlstudioproxy
-jupyter nbextension     enable --py nbdlstudioproxy
+jupyter nbextension install --py nbdlstudioproxy
+jupyter nbextension enable --py nbdlstudioproxy
+cd ..
