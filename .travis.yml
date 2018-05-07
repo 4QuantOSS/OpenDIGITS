@@ -91,25 +91,6 @@ addons:
             - libopenblas-dev
             - libopencv-dev
             - libsnappy-dev
-            - python3-dev
-            - python3-flask
-            - python3-gevent
-            - python3-gevent-websocket
-            - python3-gflags
-            - python3-h5py
-            - python3-matplotlib
-            - python3-mock
-            - python3-nose
-            - python3-numpy
-            - python3-opencv
-            - python3-pil
-            - python3-pip
-            - python3-psutil
-            - python3-pydot
-            - python3-requests
-            - python3-scipy
-            - python3-six
-            - python3-skimage
 
 before_install:
     - deactivate
@@ -117,6 +98,16 @@ before_install:
     - source ~/venv/bin/activate
 
 install:
+    - wget http://repo.continuum.io/miniconda/Miniconda3-3.7.3-Linux-x86_64.sh -O miniconda.sh;
+    - bash miniconda.sh -b -p $HOME/miniconda
+    - export PATH="$HOME/miniconda/bin:$PATH"
+    - hash -r
+    - conda config --set always_yes yes --set changeps1 no
+    - conda update -q conda
+    - conda info -a
+    - conda create --yes -q -n test python=$TRAVIS_PYTHON_VERSION pip numpy scipy pytest boto
+    - conda env update -n test -f binder/environment.yml -q
+    - source activate test
     - mkdir -p ~/.config/matplotlib
     - echo "backend:agg" > ~/.config/matplotlib/matplotlibrc
     - ./scripts/travis/install-protobuf.sh $PROTOBUF_ROOT

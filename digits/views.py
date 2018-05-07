@@ -328,8 +328,7 @@ def login():
     Sets a cookie
     """
     # Get the URL to redirect to after logging in
-    next_url = utils.routing.get_request_arg('next') or \
-        flask.request.referrer or flask.url_for('.home')
+    next_url = flask.request.referrer or flask.url_for('.home')
 
     if flask.request.method == 'GET':
         return flask.render_template('login.html', next=next_url)

@@ -31,9 +31,6 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 import digits.config  # noqa
 from digits import utils, log  # noqa
 
-# Import digits.config first to set the path to Caffe
-import caffe.io  # noqa
-import caffe_pb2  # noqa
 
 if digits.config.config_value('tensorflow')['enabled']:
     from . import tensorflow as tf

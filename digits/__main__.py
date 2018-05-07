@@ -22,7 +22,7 @@ def main():
     parser.add_argument(
         '-p', '--port',
         type=int,
-        default=5000,
+        default=5001,
         help='Port to run app on (default 5000)'
     )
     parser.add_argument(
