@@ -5,7 +5,7 @@ import csv
 import operator
 import os
 import random
-import StringIO
+from io import StringIO
 
 import numpy as np
 

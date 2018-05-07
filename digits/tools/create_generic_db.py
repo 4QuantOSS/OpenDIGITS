@@ -12,7 +12,7 @@ import logging
 import numpy as np
 import os
 import PIL.Image
-import Queue
+import queue as Queue
 import sys
 import threading
 
@@ -21,10 +21,6 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 import digits.config  # noqa
 from digits import extensions, log  # noqa
 from digits.job import Job  # noqa
-
-# Import digits.config first to set the path to Caffe
-import caffe.io  # noqa
-import caffe_pb2  # noqa
 
 try:
     xrange          # Python 2
