@@ -14,7 +14,7 @@ import time
 try:
     from cStringIO import StringIO
 except ImportError:
-    from StringIO import StringIO
+    from io import StringIO
 
 import lmdb
 import numpy as np

@@ -8,7 +8,7 @@ import tempfile
 try:
     from cStringIO import StringIO
 except ImportError:
-    from StringIO import StringIO
+    from io import StringIO
 
 import mock
 from nose.tools import assert_raises

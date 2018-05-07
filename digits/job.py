@@ -8,12 +8,14 @@ import pickle
 import shutil
 import threading
 import time
+import codecs
 
 import flask
 
 from .status import Status, StatusCls
 from digits.config import config_value
 from digits.utils import sizeof_fmt, filesystem as fs
+
 
 # NOTE: Increment this every time the pickled object changes
 PICKLE_VERSION = 2
@@ -56,7 +58,7 @@ class Job(StatusCls):
         super(Job, self).__init__()
 
         # create a unique ID
-        self._id = '%s-%s' % (time.strftime('%Y%m%d-%H%M%S'), os.urandom(2).encode('hex'))
+        self._id = '%s-%s' % (time.strftime('%Y%m%d-%H%M%S'), codecs.encode(os.urandom(2), 'hex'))
         self._dir = os.path.join(config_value('jobs_dir'), self._id)
         self._name = name
         self.group = group
