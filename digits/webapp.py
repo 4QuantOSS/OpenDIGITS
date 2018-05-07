@@ -1,12 +1,12 @@
 # Copyright (c) 2014-2017, NVIDIA CORPORATION.  All rights reserved.
 from __future__ import absolute_import
+from gevent import monkey
+monkey.patch_all()
 
 import os
 
 import flask
 from flask.ext.socketio import SocketIO
-from gevent import monkey
-monkey.patch_all()
 
 from .config import config_value  # noqa
 from digits import utils  # noqa
