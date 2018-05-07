@@ -23,8 +23,6 @@ from digits.inference.errors import InferenceError  # noqa
 from digits.job import Job  # noqa
 from digits.utils.lmdbreader import DbReader  # noqa
 
-# Import digits.config before caffe to set the path
-import caffe_pb2  # noqa
 
 logger = logging.getLogger('digits.tools.inference')
 

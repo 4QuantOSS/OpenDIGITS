@@ -11,7 +11,7 @@ import tempfile
 try:
     from cStringIO import StringIO
 except ImportError:
-    from StringIO import StringIO
+    from io import StringIO
 
 from bs4 import BeautifulSoup
 import PIL.Image

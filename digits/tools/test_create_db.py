@@ -4,7 +4,7 @@ from collections import Counter
 import os.path
 import shutil
 import tempfile
-import Queue
+import queue as Queue
 
 import nose.tools
 import numpy as np
