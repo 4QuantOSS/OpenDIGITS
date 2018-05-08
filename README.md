@@ -32,7 +32,6 @@ Then, take a look at some of the other documentation at [docs/](docs/) and [exam
 * [Train a text classification network](examples/text-classification/README.md)
 * [Train an object detection network](examples/object-detection/README.md)
 * [Learn more about weight initialization](examples/weight-init/README.md)
-* [Use Python layers in your Caffe networks](examples/python-layer/README.md)
 * [Download a model and use it to classify an image outside of DIGITS](examples/classification/README.md)
 * [Overview of the REST API](docs/API.md)
 

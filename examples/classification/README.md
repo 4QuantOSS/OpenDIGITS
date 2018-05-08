@@ -17,10 +17,6 @@ In DIGITS, the same method will be used as was originally used when training you
 
 ## Requirements
 
-See [BuildCaffe.md](../../docs/BuildCaffe.md) for instructions about installing caffe.
-Other requirements can be found in `requirements.txt`.
-You do not need as many packages to run this example as you do to run DIGITS.
-
 ## Usage
 
 Use one of the two python scripts provided to classify an image.

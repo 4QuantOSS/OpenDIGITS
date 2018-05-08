@@ -1,10 +1,7 @@
 os: linux
 dist: trusty
 sudo: required
-language: python
-python: 3.6
-virtualenv:
-  system_site_packages: true
+language: generic
 
 env:
     global:
@@ -61,7 +58,6 @@ addons:
 
 
 install:
-    - deactivate
     - wget http://repo.continuum.io/miniconda/Miniconda3-3.7.3-Linux-x86_64.sh -O miniconda.sh;
     - bash miniconda.sh -b -p $HOME/miniconda
     - export PATH="$PATH:$HOME/miniconda/bin"
@@ -69,7 +65,7 @@ install:
     - conda config --set always_yes yes --set changeps1 no
     - conda update -q conda
     - conda info -a
-    - conda create --yes -q -n test python=$TRAVIS_PYTHON_VERSION pip pytest
+    - conda create --yes -q -n test python=3.6 pip pytest
     - conda env update -n test -f binder/environment.yml -q
     - source activate test
     - mkdir -p ~/.config/matplotlib

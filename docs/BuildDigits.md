@@ -39,18 +39,16 @@ Install some dependencies with Deb packages:
 sudo apt-get install --no-install-recommends git graphviz python-dev python-flask python-flaskext.wtf python-gevent python-h5py python-numpy python-pil python-pip python-scipy python-tk
 ```
 
-Follow [these instructions](BuildCaffe.md) to build Caffe (**required**).
-
 Follow [these instructions](BuildTorch.md) to build Torch7 (*suggested*).
 
-Follow [these instructions](BuildTensorflow.md) to build Tensorflow (*suggseted*).
+Follow [these instructions](BuildTensorflow.md) to build Tensorflow (*required*).
 
 ## Download source
 
 ```sh
 # example location - can be customized
 DIGITS_ROOT=~/digits
-git clone https://github.com/NVIDIA/DIGITS.git $DIGITS_ROOT
+git clone https://github.com/4QuantOSS/OpenDIGITS.git $DIGITS_ROOT
 ```
 
 Throughout the docs, we'll refer to your install location as `DIGITS_ROOT` (`~/digits` in this case), though you don't need to actually set that environment variable.
