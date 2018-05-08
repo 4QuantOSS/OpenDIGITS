@@ -1,5 +1,3 @@
-source activate root
-
 # somehow pip gets destroyed
 git clone https://github.com/pypa/pip.git
 cd pip
@@ -10,13 +8,14 @@ pip install https://github.com/betatim/nbserverproxy/archive/master.zip
 jupyter serverextension enable --py nbserverproxy
 cd binder
 pip install -e.
-jupyter serverextension enable --py nbdlstudioproxy
-jupyter nbextension install --py nbdlstudioproxy
-jupyter nbextension enable --py nbdlstudioproxy
+jupyter serverextension enable --user --py nbdlstudioproxy
+jupyter nbextension install --user --py nbdlstudioproxy
+jupyter nbextension enable --user --py nbdlstudioproxy
 cd ..
 # install digits
 cd ${HOME}
 python setup.py install
+pip install --user -r requirements_test.txt
 # download some datas
 python -m digits.download_data cifar10 ~/cifar10
 # get matplotlib working
