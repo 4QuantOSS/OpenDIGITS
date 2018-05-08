@@ -25,9 +25,6 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 import digits.config  # noqa
 from digits import log  # noqa
 
-# Import digits.config first to set path to Caffe
-import caffe.io  # noqa
-import caffe_pb2  # noqa
 
 logger = logging.getLogger('digits.tools.analyze_db')
 np.set_printoptions(suppress=True, precision=3)

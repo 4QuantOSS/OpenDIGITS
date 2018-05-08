@@ -34,17 +34,6 @@ class TestVersion():
         import digits.version
         self.check_version(digits.version.__version__)
 
-    # Test a programmatic and reliable way to check the version
-    # python -c "execfile('digits/version.py'); print __version__"
-    def test_execfile_version(self):
-        import digits
-        filename = os.path.join(os.path.dirname(digits.__file__), 'version.py')
-        file_locals = {}
-        exec(open(filename).read(), {}, file_locals)
-        assert file_locals.keys() == ['__version__'], \
-            'version.py should only declare a single variable'
-        self.check_version(file_locals['__version__'])
-
     # Make sure somebody doesn't overwrite the version in __init__.py
     def test_package_version_matches_import_version(self):
         import digits

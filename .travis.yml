@@ -30,7 +30,7 @@ matrix:
           install: true
           script:
               - ./digits-lint
-              
+
 cache:
     apt: true
     directories:

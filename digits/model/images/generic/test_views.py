@@ -15,7 +15,7 @@ import unittest
 try:
     from cStringIO import StringIO
 except ImportError:
-    from StringIO import StringIO
+    from io import StringIO
 
 from bs4 import BeautifulSoup
 
@@ -343,12 +343,6 @@ class BaseTestCreation(BaseViewsTestWithDataset):
     @unittest.skipIf(
         not config_value('gpu_list'),
         'no GPUs selected')
-    @unittest.skipIf(
-        not config_value('caffe')['cuda_enabled'],
-        'CUDA disabled')
-    @unittest.skipIf(
-        config_value('caffe')['multi_gpu'],
-        'multi-GPU enabled')
     def test_select_gpu(self):
         for index in config_value('gpu_list').split(','):
             yield self.check_select_gpu, index

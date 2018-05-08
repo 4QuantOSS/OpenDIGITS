@@ -9,7 +9,6 @@ import shutil
 import tempfile
 import time
 import unittest
-import caffe_pb2
 import math
 
 
@@ -17,7 +16,7 @@ import math
 try:
     from cStringIO import StringIO
 except ImportError:
-    from StringIO import StringIO
+    from io import StringIO
 
 from bs4 import BeautifulSoup
 
@@ -26,7 +25,6 @@ import digits.dataset.images.classification.test_views
 import digits.test_views
 from digits import test_utils
 import digits.webapp
-from digits.frameworks import CaffeFramework
 from google.protobuf import text_format
 
 try:
@@ -383,12 +381,6 @@ class BaseTestCreation(BaseViewsTestWithDataset):
     @unittest.skipIf(
         not config_value('gpu_list'),
         'no GPUs selected')
-    @unittest.skipIf(
-        not config_value('caffe')['cuda_enabled'],
-        'CUDA disabled')
-    @unittest.skipIf(
-        config_value('caffe')['multi_gpu'],
-        'multi-GPU enabled')
     def test_select_gpu(self):
         for index in config_value('gpu_list').split(','):
             yield self.check_select_gpu, index
@@ -400,12 +392,6 @@ class BaseTestCreation(BaseViewsTestWithDataset):
     @unittest.skipIf(
         not config_value('gpu_list'),
         'no GPUs selected')
-    @unittest.skipIf(
-        not config_value('caffe')['cuda_enabled'],
-        'CUDA disabled')
-    @unittest.skipIf(
-        not config_value('caffe')['multi_gpu'],
-        'multi-GPU disabled')
     def test_select_gpus(self):
         # test all possible combinations
         gpu_list = config_value('gpu_list').split(',')
