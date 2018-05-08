@@ -7,7 +7,7 @@ from collections import Counter
 import logging
 import math
 import os
-import Queue
+import queue as Queue
 import random
 import re
 import shutil
