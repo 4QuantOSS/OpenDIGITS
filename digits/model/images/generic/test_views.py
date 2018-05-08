@@ -354,12 +354,6 @@ class BaseTestCreation(BaseViewsTestWithDataset):
     @unittest.skipIf(
         not config_value('gpu_list'),
         'no GPUs selected')
-    @unittest.skipIf(
-        not config_value('caffe')['cuda_enabled'],
-        'CUDA disabled')
-    @unittest.skipIf(
-        not config_value('caffe')['multi_gpu'],
-        'multi-GPU disabled')
     def test_select_gpus(self):
         # test all possible combinations
         gpu_list = config_value('gpu_list').split(',')
@@ -1029,65 +1023,6 @@ class BaseTestCreatedCropInForm(BaseTestCreated):
 # Test classes
 ################################################################################
 
-
-class TestCaffeViews(BaseTestViews, test_utils.CaffeMixin):
-    pass
-
-
-class TestCaffeCreation(BaseTestCreation, test_utils.CaffeMixin):
-    pass
-
-
-class TestCaffeCreated(BaseTestCreated, test_utils.CaffeMixin):
-    pass
-
-
-class TestCaffeCreatedWithGradientDataExtension(
-        BaseTestCreatedWithGradientDataExtension, test_utils.CaffeMixin):
-    pass
-
-
-class TestCaffeCreatedWithGradientDataExtensionNoValSet(
-        BaseTestCreatedWithGradientDataExtension, test_utils.CaffeMixin):
-
-    @classmethod
-    def setUpClass(cls):
-        super(TestCaffeCreatedWithGradientDataExtensionNoValSet, cls).setUpClass(val_image_count=0)
-
-
-class TestCaffeCreatedWithImageProcessingExtensionMeanImage(
-        BaseTestCreatedWithImageProcessingExtension, test_utils.CaffeMixin):
-    MEAN = 'image'
-
-
-class TestCaffeCreatedWithImageProcessingExtensionMeanPixel(
-        BaseTestCreatedWithImageProcessingExtension, test_utils.CaffeMixin):
-    MEAN = 'pixel'
-
-
-class TestCaffeCreatedWithImageProcessingExtensionMeanNone(
-        BaseTestCreatedWithImageProcessingExtension, test_utils.CaffeMixin):
-    MEAN = 'none'
-
-
-class TestCaffeCreatedVariableSizeDataset(
-        BaseTestCreatedWithImageProcessingExtension, test_utils.CaffeMixin):
-    MEAN = 'none'
-    VARIABLE_SIZE_DATASET = True
-
-
-class TestCaffeDatasetModelInteractions(BaseTestDatasetModelInteractions, test_utils.CaffeMixin):
-    pass
-
-
-class TestCaffeCreatedCropInNetwork(BaseTestCreatedCropInNetwork, test_utils.CaffeMixin):
-    pass
-
-
-class TestCaffeCreatedCropInForm(BaseTestCreatedCropInForm, test_utils.CaffeMixin):
-    pass
-
-
 class TestTorchViews(BaseTestViews, test_utils.TorchMixin):
     pass
 
@@ -1229,84 +1164,6 @@ end
         assert output.shape == (1, self.CROP_SIZE, self.CROP_SIZE), \
             'shape mismatch: %s' % str(output.shape)
 
-
-class TestSweepCreation(BaseViewsTestWithDataset, test_utils.CaffeMixin):
-    """
-    Model creation tests
-    """
-
-    def test_sweep(self):
-        job_ids = self.create_model(json=True, learning_rate='[0.01, 0.02]', batch_size='[8, 10]')
-        for job_id in job_ids:
-            assert self.model_wait_completion(job_id) == 'Done', 'create failed'
-            assert self.delete_model(job_id) == 200, 'delete failed'
-            assert not self.model_exists(job_id), 'model exists after delete'
-
-
-class TestAllInOneNetwork(BaseTestCreation, BaseTestCreated, test_utils.CaffeMixin):
-    """
-    Test an all-in-one network
-    """
-    CAFFE_NETWORK = \
-        """
-layer {
-  name: "train_data"
-  type: "Data"
-  top: "scaled_data"
-  transform_param {
-    scale: 0.004
-  }
-  include { phase: TRAIN }
-}
-layer {
-  name: "train_label"
-  type: "Data"
-  top: "label"
-  include { phase: TRAIN }
-}
-layer {
-  name: "val_data"
-  type: "Data"
-  top: "scaled_data"
-  transform_param {
-    scale: 0.004
-  }
-  include { phase: TEST }
-}
-layer {
-  name: "val_label"
-  type: "Data"
-  top: "label"
-  include { phase: TEST }
-}
-layer {
-  name: "scale"
-  type: "Power"
-  bottom: "data"
-  top: "scaled_data"
-  power_param {
-    scale: 0.004
-  }
-  include { stage: "deploy" }
-}
-layer {
-  name: "hidden"
-  type: "InnerProduct"
-  bottom: "scaled_data"
-  top: "output"
-  inner_product_param {
-    num_output: 2
-  }
-}
-layer {
-  name: "loss"
-  type: "EuclideanLoss"
-  bottom: "output"
-  bottom: "label"
-  top: "loss"
-  exclude { stage: "deploy" }
-}
-"""
 
 
 class TestTensorflowCreation(BaseTestCreation, test_utils.TensorflowMixin):

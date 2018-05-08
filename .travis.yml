@@ -9,7 +9,6 @@ python: 3.6
 env:
     global:
         - PROTOBUF_ROOT=~/protobuf
-        - CAFFE_ROOT=~/caffe
         - TORCH_ROOT=~/torch
         - OMP_NUM_THREADS=1
         - OPENBLAS_MAIN_FREE=1
@@ -63,6 +62,7 @@ addons:
 
 
 install:
+    - deactivate
     - wget http://repo.continuum.io/miniconda/Miniconda3-3.7.3-Linux-x86_64.sh -O miniconda.sh;
     - bash miniconda.sh -b -p $HOME/miniconda
     - export PATH="$PATH:$HOME/miniconda/bin"

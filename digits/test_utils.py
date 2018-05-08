@@ -40,22 +40,6 @@ class DatasetMixin(object):
             supercls.setUpClass()
 
 
-class CaffeMixin(object):
-    """
-    Mixin for caffe tests
-    """
-    FRAMEWORK = 'caffe'
-
-    @classmethod
-    def setUpClass(cls):
-        skipIfNotFramework('caffe')
-
-        # Call super.setUpClass() unless we're the last in the class hierarchy
-        supercls = super(CaffeMixin, cls)
-        if hasattr(supercls, 'setUpClass'):
-            supercls.setUpClass()
-
-
 class TorchMixin(object):
     """
     Mixin for torch tests

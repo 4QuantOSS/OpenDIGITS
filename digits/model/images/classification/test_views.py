@@ -843,9 +843,7 @@ class BaseTestCreated(BaseViewsTestWithModel):
             raise unittest.SkipTest('Tensorflow CPU inference during training not supported')
 
         gpu_count = 1
-        if (config_value('gpu_list') and
-                config_value('caffe')['cuda_enabled'] and
-                config_value('caffe')['multi_gpu']):
+        if (config_value('gpu_list')):
             gpu_count = len(config_value('gpu_list').split(','))
 
         # grab an image for testing
@@ -1057,60 +1055,6 @@ end
 # Test classes
 ################################################################################
 
-
-class TestCaffeViews(BaseTestViews, test_utils.CaffeMixin):
-    pass
-
-
-class TestCaffeCreation(BaseTestCreation, test_utils.CaffeMixin):
-    pass
-
-
-class TestCaffeCreatedWideMoreNumOutput(BaseTestCreatedWide, test_utils.CaffeMixin):
-    CAFFE_NETWORK = \
-        """
-layer {
-    name: "hidden"
-    type: 'InnerProduct'
-    bottom: "data"
-    top: "output"
-    inner_product_param {
-        num_output: 1000
-    }
-}
-layer {
-    name: "loss"
-    type: "SoftmaxWithLoss"
-    bottom: "output"
-    bottom: "label"
-    top: "loss"
-    exclude { stage: "deploy" }
-}
-layer {
-    name: "accuracy"
-    type: "Accuracy"
-    bottom: "output"
-    bottom: "label"
-    top: "accuracy"
-    include { stage: "val" }
-}
-layer {
-    name: "softmax"
-    type: "Softmax"
-    bottom: "output"
-    top: "softmax"
-    include { stage: "deploy" }
-}
-"""
-
-
-
-
-class TestCaffeCreatedTallMultiStepLR(BaseTestCreatedTall, test_utils.CaffeMixin):
-    LR_POLICY = 'multistep'
-    LR_MULTISTEP_VALUES = '50,75,90'
-
-
 class TestTorchViews(BaseTestViews, test_utils.TorchMixin):
     pass
 
@@ -1135,21 +1079,6 @@ class TestTorchCreatedTallHdf5Shuffle(BaseTestCreatedTall, test_utils.TorchMixin
 
 class TestTorchDatasetModelInteractions(BaseTestDatasetModelInteractions, test_utils.TorchMixin):
     pass
-
-
-class TestCaffeLeNet(BaseTestCreated, test_utils.CaffeMixin):
-    IMAGE_WIDTH = 28
-    IMAGE_HEIGHT = 28
-
-    CAFFE_NETWORK = open(
-        os.path.join(
-            os.path.dirname(digits.__file__),
-            'standard-networks', 'caffe', 'lenet.prototxt')
-    ).read()
-
-
-class TestCaffeLeNetADAMOptimizer(TestCaffeLeNet):
-    OPTIMIZER = 'ADAM'
 
 
 class TestTorchCreatedCropInForm(BaseTestCreatedCropInForm, test_utils.TorchMixin):
@@ -1197,116 +1126,6 @@ class TestTorchLeNetADAMOptimizer(TestTorchLeNet):
 class TestTorchLeNetHdf5Shuffle(TestTorchLeNet):
     BACKEND = 'hdf5'
     SHUFFLE = True
-
-
-class TestCaffePythonLayer(BaseViewsTestWithDataset, test_utils.CaffeMixin):
-    CAFFE_NETWORK = """\
-layer {
-    name: "hidden"
-    type: 'InnerProduct'
-    inner_product_param {
-        num_output: 500
-        weight_filler {
-            type: "xavier"
-        }
-        bias_filler {
-             type: "constant"
-        }
-    }
-    bottom: "data"
-    top: "output"
-}
-layer {
-    name: "loss"
-    type: "SoftmaxWithLoss"
-    bottom: "output"
-    bottom: "label"
-    top: "loss"
-    exclude { stage: "deploy" }
-}
-layer {
-    name: "accuracy"
-    type: "Accuracy"
-    bottom: "output"
-    bottom: "label"
-    top: "accuracy"
-    include { stage: "val" }
-}
-layer {
-    name: "py_test"
-    type: "Python"
-    bottom: "output"
-    top: "py_test"
-    python_param {
-        module: "digits_python_layers"
-        layer: "PythonLayer"
-    }
-}
-layer {
-    name: "softmax"
-    type: "Softmax"
-    bottom: "output"
-    top: "softmax"
-    include { stage: "deploy" }
-}
-"""
-
-    def write_python_layer_script(self, filename):
-        with open(filename, 'w') as f:
-            f.write("""\
-import caffe
-import numpy as np
-
-class PythonLayer(caffe.Layer):
-
-    def setup(self, bottom, top):
-        print 'PythonLayer::setup'
-        if len(bottom) != 1:
-            raise Exception("Need one input.")
-
-    def reshape(self, bottom, top):
-        print 'PythonLayer::reshape'
-        top[0].reshape(1)
-
-    def forward(self, bottom, top):
-        print 'PythonLayer::forward'
-        top[0].data[...] = np.sum(bottom[0].data) / 2. / bottom[0].num
-""")
-
-    # This test makes a temporary python layer file whose path is set
-    # as py_layer_server_file.  The job creation process copies that
-    # file to the job_dir.  The CAFFE_NETWORK above, requires that
-    # python script to be in the correct spot. If there is an error
-    # in the script or if the script is named incorrectly, or does
-    # not exist in the job_dir, then the test will fail.
-    def test_python_layer(self):
-        tmpdir = tempfile.mkdtemp()
-        py_file = tmpdir + '/py_test.py'
-        self.write_python_layer_script(py_file)
-
-        job_id = self.create_model(python_layer_server_file=py_file)
-
-        # remove the temporary python script.
-        shutil.rmtree(tmpdir)
-
-        assert self.model_wait_completion(job_id) == 'Done', 'first job failed'
-        rv = self.app.get('/models/%s.json' % job_id)
-        assert rv.status_code == 200, 'json load failed with %s' % rv.status_code
-        content = json.loads(rv.data)
-        assert len(content['snapshots']), 'should have at least snapshot'
-
-
-class TestSweepCreation(BaseViewsTestWithDataset, test_utils.CaffeMixin):
-    """
-    Model creation tests
-    """
-
-    def test_sweep(self):
-        job_ids = self.create_model(json=True, learning_rate='[0.01, 0.02]', batch_size='[8, 10]')
-        for job_id in job_ids:
-            assert self.model_wait_completion(job_id) == 'Done', 'create failed'
-            assert self.delete_model(job_id) == 200, 'delete failed'
-            assert not self.model_exists(job_id), 'model exists after delete'
 
 
 # Tensorflow
