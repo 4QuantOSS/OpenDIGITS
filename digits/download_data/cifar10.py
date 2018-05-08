@@ -2,7 +2,7 @@ from __future__ import print_function
 from __future__ import absolute_import
 # Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
 
-import cPickle
+import pickle
 import os
 import tarfile
 
@@ -36,7 +36,7 @@ class Cifar10Downloader(DataDownloader):
         label_filename = 'batches.meta'
         label_filepath = os.path.join(self.outdir, 'cifar-10-batches-py', label_filename)
         with open(label_filepath, 'rb') as infile:
-            pickleObj = cPickle.load(infile)
+            pickleObj = pickle.load(infile)
             label_names = pickleObj['label_names']
 
         for phase in 'train', 'test':
@@ -72,7 +72,7 @@ class Cifar10Downloader(DataDownloader):
 
         # Read the pickle file
         with open(input_file, 'rb') as infile:
-            pickleObj = cPickle.load(infile)
+            pickleObj = pickle.load(infile)
             # print 'Batch -', pickleObj['batch_label']
             data = pickleObj['data']
             assert data.shape == (10000, 3072), 'Expected data.shape to be (10000, 3072), not %s' % (data.shape,)

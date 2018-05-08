@@ -1,4 +1,5 @@
-pip3 install https://github.com/betatim/nbserverproxy/archive/master.zip
+source activate root
+pip install https://github.com/betatim/nbserverproxy/archive/master.zip
 jupyter serverextension enable --py nbserverproxy
 # install digits
 python setup.py install
@@ -10,3 +11,5 @@ jupyter serverextension enable --py nbdlstudioproxy
 jupyter nbextension install --py nbdlstudioproxy
 jupyter nbextension enable --py nbdlstudioproxy
 cd ..
+mkdir -p ~/.config/matplotlib
+echo "backend:agg" > ~/.config/matplotlib/matplotlibrc
