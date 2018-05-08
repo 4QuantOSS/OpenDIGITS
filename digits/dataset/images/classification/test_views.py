@@ -277,7 +277,7 @@ class TestCreation(BaseViewsTestWithImageset, test_utils.DatasetMixin):
         textfile_train_images = ''
         textfile_labels_file = ''
         label_id = 0
-        for label, images in self.imageset_paths.iteritems():
+        for label, images in self.imageset_paths.items():
             textfile_labels_file += '%s\n' % label
             for image in images:
                 image_path = image

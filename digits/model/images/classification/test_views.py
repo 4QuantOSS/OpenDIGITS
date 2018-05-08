@@ -698,7 +698,7 @@ class BaseTestCreated(BaseViewsTestWithModel):
     def test_classify_many(self):
         textfile_images = ''
         label_id = 0
-        for label, images in self.imageset_paths.iteritems():
+        for label, images in self.imageset_paths.items():
             for image in images:
                 image_path = image
                 image_path = os.path.join(self.imageset_folder, image_path)
@@ -719,7 +719,7 @@ class BaseTestCreated(BaseViewsTestWithModel):
     def test_classify_many_from_folder(self):
         textfile_images = ''
         label_id = 0
-        for label, images in self.imageset_paths.iteritems():
+        for label, images in self.imageset_paths.items():
             for image in images:
                 image_path = image
                 textfile_images += '%s %d\n' % (image_path, label_id)
@@ -740,7 +740,7 @@ class BaseTestCreated(BaseViewsTestWithModel):
     def test_classify_many_invalid_ground_truth(self):
         textfile_images = ''
         label_id = 0
-        for label, images in self.imageset_paths.iteritems():
+        for label, images in self.imageset_paths.items():
             for image in images:
                 image_path = image
                 image_path = os.path.join(self.imageset_folder, image_path)
@@ -762,7 +762,7 @@ class BaseTestCreated(BaseViewsTestWithModel):
     def test_classify_many_json(self):
         textfile_images = ''
         label_id = 0
-        for label, images in self.imageset_paths.iteritems():
+        for label, images in self.imageset_paths.items():
             for image in images:
                 image_path = image
                 image_path = os.path.join(self.imageset_folder, image_path)
@@ -789,7 +789,7 @@ class BaseTestCreated(BaseViewsTestWithModel):
     def test_top_n(self):
         textfile_images = ''
         label_id = 0
-        for label, images in self.imageset_paths.iteritems():
+        for label, images in self.imageset_paths.items():
             for image in images:
                 image_path = image
                 image_path = os.path.join(self.imageset_folder, image_path)
@@ -813,7 +813,7 @@ class BaseTestCreated(BaseViewsTestWithModel):
     def test_top_n_from_folder(self):
         textfile_images = ''
         label_id = 0
-        for label, images in self.imageset_paths.iteritems():
+        for label, images in self.imageset_paths.items():
             for image in images:
                 image_path = image
                 textfile_images += '%s %d\n' % (image_path, label_id)

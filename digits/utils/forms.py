@@ -30,7 +30,7 @@ def validate_required_iff(**kwargs):
     """
     def _validator(form, field):
         all_conditions_met = True
-        for key, value in kwargs.iteritems():
+        for key, value in kwargs.items():
             if getattr(form, key).data != value:
                 all_conditions_met = False
 

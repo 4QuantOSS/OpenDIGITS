@@ -119,7 +119,7 @@ class Cifar100Downloader(DataDownloader):
                     fine_to_coarse[fine_label] = coarse_label_names[coarse_labels[index]]
 
         # Create the coarse dataset with symlinks
-        for fine, coarse in fine_to_coarse.iteritems():
+        for fine, coarse in fine_to_coarse.items():
             self.mkdir(os.path.join(coarse_dirname, coarse))
             os.symlink(
                 # Create relative symlinks for portability

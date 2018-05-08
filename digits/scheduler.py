@@ -473,7 +473,7 @@ class Scheduler:
         """
         try:
             # reserve resources
-            for resource_type, requests in resources.iteritems():
+            for resource_type, requests in resources.items():
                 for identifier, value in requests:
                     found = False
                     for resource in self.resources[resource_type]:
@@ -497,7 +497,7 @@ class Scheduler:
         Release resources previously reserved for a task
         """
         # release resources
-        for resource_type, requests in resources.iteritems():
+        for resource_type, requests in resources.items():
             for identifier, value in requests:
                 for resource in self.resources[resource_type]:
                     if resource.identifier == identifier:

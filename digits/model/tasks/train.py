@@ -575,7 +575,7 @@ class TrainTask(Task):
             else:
                 # return all data
                 stride = 1
-            for name, output in self.train_outputs.iteritems():
+            for name, output in self.train_outputs.items():
                 if name not in ['epoch', 'learning_rate']:
                     col_id = '%s-train' % name
                     data['xs'][col_id] = 'train_epochs'
@@ -600,7 +600,7 @@ class TrainTask(Task):
             else:
                 # return all data
                 stride = 1
-            for name, output in self.val_outputs.iteritems():
+            for name, output in self.val_outputs.items():
                 if name not in ['epoch']:
                     col_id = '%s-val' % name
                     data['xs'][col_id] = 'val_epochs'

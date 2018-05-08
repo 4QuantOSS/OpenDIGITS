@@ -414,7 +414,7 @@ def infer_one():
 
     if request_wants_json():
         return flask.jsonify({'outputs': dict((name, blob.tolist())
-                                              for name, blob in outputs.iteritems())}), status_code
+                                              for name, blob in outputs.items())}), status_code
     else:
         return flask.render_template(
             'models/images/generic/infer_one.html',
@@ -509,7 +509,7 @@ def infer_extension():
     if request_wants_json():
         result = {}
         for i, key in enumerate(keys):
-            result[key] = dict((name, blob[i].tolist()) for name, blob in outputs.iteritems())
+            result[key] = dict((name, blob[i].tolist()) for name, blob in outputs.items())
         return flask.jsonify({'outputs': result}), status_code
     else:
         return flask.render_template(
@@ -598,7 +598,7 @@ def infer_db():
     if request_wants_json():
         result = {}
         for i, key in enumerate(keys):
-            result[key] = dict((name, blob[i].tolist()) for name, blob in outputs.iteritems())
+            result[key] = dict((name, blob[i].tolist()) for name, blob in outputs.items())
         return flask.jsonify({'outputs': result}), status_code
     else:
         return flask.render_template(
@@ -713,7 +713,7 @@ def infer_many():
     if request_wants_json():
         result = {}
         for i, path in enumerate(paths):
-            result[path] = dict((name, blob[i].tolist()) for name, blob in outputs.iteritems())
+            result[path] = dict((name, blob[i].tolist()) for name, blob in outputs.items())
         return flask.jsonify({'outputs': result}), status_code
     else:
         return flask.render_template(

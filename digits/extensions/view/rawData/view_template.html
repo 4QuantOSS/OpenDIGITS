@@ -4,7 +4,7 @@
 {% from "helper.html" import print_errors %}
 {% from "helper.html" import mark_errors %}
 
-{% for key, val in data.iteritems() %}
+{% for key, val in data.items() %}
 	<td>{{key}}</td>
 	<td>{{data[key]}}</td>
 {% endfor %}
