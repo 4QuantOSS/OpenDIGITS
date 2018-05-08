@@ -1,10 +1,10 @@
-# Copyright (c) 2015-2017, NVIDIA CORPORATION.  All rights reserved.
-
 os: linux
 dist: trusty
 sudo: required
 language: python
 python: 3.6
+virtualenv:
+  system_site_packages: true
 
 env:
     global:
@@ -35,7 +35,6 @@ cache:
     apt: true
     directories:
         - $PROTOBUF_ROOT
-        - $CAFFE_ROOT
         - $TORCH_ROOT
 
 addons:

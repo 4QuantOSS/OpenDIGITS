@@ -1,10 +1,10 @@
-# OpenDIGITS [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/kmader/DIGITS/master?urlpath=digits)
+# OpenDIGITS [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/v2/gh/4QuantOSS/OpenDIGITS/master?urlpath=digits)
 
 
-[![Build Status](https://travis-ci.org/kmader/DIGITS.svg?branch=master)](https://travis-ci.org/kmader/DIGITS)
+[![Build Status](https://travis-ci.org/4QuantOSS/OpenDIGITS.svg?branch=master)](https://travis-ci.org/4QuantOSS/OpenDIGITS)
 
 OpenDIGITS (the **D**eep Learning **G**PU **T**raining **S**ystem) is a webapp for training deep learning models.
-The currently supported frameworks are: Torch and Tensorflow on Python 3.
+The currently supported frameworks are: Torch and Tensorflow on Python 3. Keras and Jupyter Notebook support is coming soon.
 
 The primary difference between this and the NVIDIA version is this is designed to be easier to install with python 3 support (pip install soon!) and no old Caffe left-overs
 
@@ -12,7 +12,7 @@ The primary difference between this and the NVIDIA version is this is designed t
 
 | Installation method | Supported platform[s] | Available versions | Instructions |
 | --- | --- | --- | --- |
-| Source | Ubuntu 14.04, 16.04 | [GitHub tags](https://github.com/NVIDIA/DIGITS/releases) | [docs/BuildDigits.md](docs/BuildDigits.md) |
+| Source | Ubuntu 14.04, 16.04 | [GitHub tags](https://github.com/4QuantOSS/OpenDIGITS/releases) | [docs/BuildDigits.md](docs/BuildDigits.md) |
 | PIP Wheel | OS X, Windows 64 | Coming Soon! | In Preparation |
 
 
@@ -40,14 +40,9 @@ Then, take a look at some of the other documentation at [docs/](docs/) and [exam
 
 ### Installation issues
 * First, check out the instructions above
-* Then, ask questions on our [user group](https://groups.google.com/d/forum/digits-users)
 
-### Usage questions
-* First, check out the [Getting Started](docs/GettingStarted.md) page
-* Then, ask questions on our [user group](https://groups.google.com/d/forum/digits-users)
+
 
 ### Bugs and feature requests
-* Please let us know by [filing a new issue](https://github.com/NVIDIA/DIGITS/issues/new)
+* Please let us know by [filing a new issue](https://github.com/4QuantOSS/OpenDIGITS/issues/new)
 * Bonus points if you want to contribute by opening a [pull request](https://help.github.com/articles/using-pull-requests/)!
-  * You will need to send a signed copy of the [Contributor License Agreement](CLA) to digits@nvidia.com before your change can be accepted.
-
