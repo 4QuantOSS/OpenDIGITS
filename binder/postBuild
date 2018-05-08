@@ -1,15 +1,24 @@
 source activate root
+
+# somehow pip gets destroyed
+git clone https://github.com/pypa/pip.git
+cd pip
+python setup.py install
+cd ..
+# install the proxy
 pip install https://github.com/betatim/nbserverproxy/archive/master.zip
 jupyter serverextension enable --py nbserverproxy
-# install digits
-python setup.py install
-# download some datas
-python -m digits.download_data cifar10 ~/cifar10
 cd binder
-pip3 install -e.
+pip install -e.
 jupyter serverextension enable --py nbdlstudioproxy
 jupyter nbextension install --py nbdlstudioproxy
 jupyter nbextension enable --py nbdlstudioproxy
 cd ..
+# install digits
+cd ${HOME}
+python setup.py install
+# download some datas
+python -m digits.download_data cifar10 ~/cifar10
+# get matplotlib working
 mkdir -p ~/.config/matplotlib
 echo "backend:agg" > ~/.config/matplotlib/matplotlibrc

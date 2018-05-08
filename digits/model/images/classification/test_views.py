@@ -151,8 +151,6 @@ class UserModel(Tower):
     def network(cls):
         if cls.FRAMEWORK == 'torch':
             return cls.TORCH_NETWORK
-        elif cls.FRAMEWORK == 'caffe':
-            return cls.CAFFE_NETWORK
         elif cls.FRAMEWORK == 'tensorflow':
             return cls.TENSORFLOW_NETWORK
         else:
